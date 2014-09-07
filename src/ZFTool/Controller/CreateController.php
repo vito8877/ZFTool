@@ -105,13 +105,13 @@ class CreateController extends AbstractActionController
                 "The path $path doesn't contain a ZF2 application. I cannot create a module here."
             );
         }
-        if (file_exists("$path/module/$module/src/$module/Controller/$name")) {
+        $ucName     = ucfirst($name);
+        if (file_exists("$path/module/$module/src/$module/Controller/{$ucName}Controller.php")) {
             return $this->sendError(
-                "The controller $name already exists in module $module."
+                "The controller {$ucName}Controller already exists in module $module."
             );
         }
 
-        $ucName     = ucfirst($name);
         $ctrlPath   = $path . '/module/' . $module . '/src/' . $module . '/Controller/' . $ucName.'Controller.php';
         $controller = $ucName . 'Controller';
 
